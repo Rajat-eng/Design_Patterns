@@ -1,0 +1,12 @@
+Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+
+public class Invoice {
+    public double calculateTotal(String type) {
+        if (type.equals("regular")) {
+            return 100;
+        } else if (type.equals("discounted")) {
+            return 80;
+        }
+        return 0;
+    }
+}

@@ -1,0 +1,14 @@
+public interface Worker {
+    void work();
+    void eat();
+}
+
+public class Robot implements Worker {
+    public void work() {
+        // Robot works
+    }
+
+    public void eat() {
+        // Robot doesn't need to eat, violating ISP
+    }
+}

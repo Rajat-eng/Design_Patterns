@@ -1,0 +1,13 @@
+public class Employee {
+    public void calculateSalary() {
+        // Calculate salary logic
+    }
+
+    public void generateReport() {
+        // Generate report logic
+    }
+}
+
+Here, the Employee class is handling both salary calculation and report generation, violating SRP. If any changes are needed in the reporting logic, the class has to be modified, which might affect the salary logic.
+
+

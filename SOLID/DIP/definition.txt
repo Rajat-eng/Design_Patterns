@@ -1,0 +1,13 @@
+public class Keyboard {
+    // Keyboard implementation
+}
+
+public class Computer {
+    private Keyboard keyboard;
+
+    public Computer() {
+        this.keyboard = new Keyboard(); // High-level module depends on low-level module
+    }
+}
+
+In this example, the Computer class is tightly coupled with the Keyboard class, making it hard to change or extend.
