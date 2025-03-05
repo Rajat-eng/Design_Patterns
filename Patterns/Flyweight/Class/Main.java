@@ -1,13 +1,15 @@
 package Patterns.Flyweight.Class;
 
+import Patterns.Flyweight.Interface.ICharacter;
+
 public class Main {
     public static void main(String[] args) {
         CharacterFactory characterFactory = new CharacterFactory();
-        Character character1 = characterFactory.getCharacter('A');
+        ICharacter character1 = characterFactory.getCharacter('A');
         character1.display("Arial");
-        Character character2 = characterFactory.getCharacter('B');
+        ICharacter character2 = characterFactory.getCharacter('B');
         character2.display("Times New Roman");
-        Character character3 = characterFactory.getCharacter('A');
+        ICharacter character3 = characterFactory.getCharacter('A');
         character3.display("Calibri");
     }
 }

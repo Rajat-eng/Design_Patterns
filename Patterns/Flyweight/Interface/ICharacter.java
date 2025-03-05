@@ -1,5 +1,5 @@
 package Patterns.Flyweight.Interface;
 
-public interface Character {
+public interface ICharacter {
     void display(String font);
 }

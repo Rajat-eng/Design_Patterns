@@ -1,8 +1,8 @@
 package Patterns.Flyweight.Class;
-import Patterns.Flyweight.Interface.Character;
+import Patterns.Flyweight.Interface.ICharacter;
 
 
-public class ConcreteCharacter implements Character {
+public class ConcreteCharacter implements ICharacter {
     private char character;
     public ConcreteCharacter(char character) {
         this.character = character;

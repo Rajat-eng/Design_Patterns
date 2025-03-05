@@ -3,20 +3,23 @@ package Patterns.Flyweight.Class;
 import java.util.HashMap;
 import java.util.Map;
 
+import Patterns.Flyweight.Interface.ICharacter;
+
+
 // Factory that returns Character instances
 public class CharacterFactory {
-    private Map<Character, Character> characterCache;
+    private Map<Character, ICharacter> characterCache;
 
     public CharacterFactory() {
         characterCache = new HashMap<>();
     }
 
-    public Character getCharacter(char c) {
-        Character character = characterCache.get(c);
+    public ICharacter getCharacter(char c) {
+        ICharacter character = characterCache.get(c);
         if (character == null) {
-            character = new ConcreteCharacter(c);  // ConcreteCharacter implements Character
-            characterCache.put(c, character);
+            ConcreteCharacter newcharacter = new ConcreteCharacter(c);  // Concrete Character implements Character
+            characterCache.put(c, newcharacter);
         }
-        return character;
+        return characterCache.get(c);
     }
 }
