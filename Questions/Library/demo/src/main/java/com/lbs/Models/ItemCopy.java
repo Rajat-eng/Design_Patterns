@@ -7,7 +7,6 @@ public class ItemCopy {
     private final String copyId;
     private final LibraryItem item;
     private ItemState state;
-    private boolean isAvailable = true;
 
     public ItemCopy(String copyId,LibraryItem item) {
         this.copyId = copyId;
