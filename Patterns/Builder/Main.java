@@ -9,9 +9,7 @@ import Patterns.Builder.Interface.MealBuilder;
 public class Main {
     public static void main(String[] args) {
         MealBuilder vegetarianMealBuilder= new VegetarianMealBuilder();
-        vegetarianMealBuilder.buildMainCourse(new Pasta());
-        vegetarianMealBuilder.buildSideDish(new Rice());
-        vegetarianMealBuilder.buildDrink(new Soda());
+        vegetarianMealBuilder.buildMainCourse(new Pasta()).buildSideDish(new Rice()).buildDrink(new Soda());
         vegetarianMealBuilder.getMeal().serveMeal();
     }
 }

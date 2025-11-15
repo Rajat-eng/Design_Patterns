@@ -6,3 +6,5 @@ public interface FurnitureFactory {
     Desk createDesk();
     Chair createChair();
 } 
+
+

@@ -13,18 +13,21 @@ public class NonVegetarianMealBuilder implements MealBuilder {
     }
 
     @Override
-    public void buildMainCourse(MainCourse mainCourse) {
-        meal.setMainCourse(mainCourse);  // Set the selected main course
+    public MealBuilder buildMainCourse(MainCourse mainCourse) {
+        meal.setMainCourse(mainCourse);  
+        return this;
     }
 
     @Override
-    public void buildSideDish(SideDish sideDish) {
-        meal.setSideDish(sideDish);  // Set the selected side dish
+    public MealBuilder buildSideDish(SideDish sideDish) {
+        meal.setSideDish(sideDish);
+        return this;  
     }
 
     @Override
-    public void buildDrink(Drink drink) {
-        meal.setDrink(drink);  // Default drink for vegetarian meal
+    public MealBuilder buildDrink(Drink drink) {
+        meal.setDrink(drink);  
+        return this;
     }
 
     @Override

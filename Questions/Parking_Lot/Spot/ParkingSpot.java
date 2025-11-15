@@ -1,16 +1,18 @@
 package Questions.Parking_Lot.Spot;
 
-import Questions.Parking_Lot.Vehicles.Vehicle;
-import Questions.Parking_Lot.Vehicles.VehicleType;
+import Questions.Parking_Lot.Level;
+import Questions.Parking_Lot.Vehicles.*;
 
 public class ParkingSpot {
     private final int spotNumber;
     private final VehicleType vehicleType;
+    private final Level level;
     private Vehicle parkedVehicle;
 
-    public ParkingSpot(int spotNumber,VehicleType vehicleType){
+    public ParkingSpot(int spotNumber,VehicleType vehicleType,Level level){
         this.spotNumber=spotNumber;
         this.vehicleType=vehicleType;
+        this.level=level;
     }
     public synchronized boolean isAvailable() {
         return parkedVehicle == null;
@@ -38,5 +40,9 @@ public class ParkingSpot {
 
     public int getSpotNumber() {
         return spotNumber;
+    }
+
+    public Level getLevel(){
+        return this.level;
     }
 }
