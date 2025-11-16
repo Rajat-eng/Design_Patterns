@@ -30,4 +30,9 @@ public class User implements TaskObserver {
     public void update(Task task, String message) {
         System.out.println("User " + this.name + " notified: Task '" + task.getTitle() + "' updated - " + message);
     }
+
+    @Override
+    public void update(User changedBy, Task task, String changeType) {
+        System.out.println("User " + this.name + " notified: Task '" + task.getTitle() + "' updated by " + changedBy.getName() + " - " + changeType);
+    }
 }

@@ -157,28 +157,33 @@ public abstract class Task{
         for (TaskObserver obs : observers) obs.update(this, changeType);
     }
 
+    public void notifyObservers(User changedBy, String changeType) {
+        if (observers == null) return;
+        for (TaskObserver obs : observers) obs.update(changedBy,this, changeType);
+    }
+
     public void updatePriority(TaskPriority priority) {
         this.priority = priority;
-        notifyObservers("priority");
+        notifyObservers(this.createdBy,"priority");
     }
 
     public void setAssignee(User user) {
         this.assignee = user;
         addObserver(user);
         addLog("Assignee changed to " + user.getName());
-        notifyObservers("assignee");
+        notifyObservers(this.createdBy,"assignee");
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
         addLog("Comment added");
-        notifyObservers("comment");
+        notifyObservers(comment.getAuthor(),"comment");
     }
 
     public void addSubtask(Task subtask,User ChangedBy) {
         subtasks.add(subtask);
         addLog("Subtask added");
-        notifyObservers("subtask");
+        notifyObservers(this.getAssignee(),"subtask");
     }
 
     public void setState(TaskState state) {

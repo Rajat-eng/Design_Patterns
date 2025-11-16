@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.task.Enums.TaskPriority;
+import com.task.Models.Comment;
 import com.task.Models.Task;
 import com.task.Models.TaskList;
 import com.task.Models.User;
@@ -73,6 +74,13 @@ public class TaskManagementSystem {
         User user = users.get(assigneeUserId);
         task.setAssignee(user);
     }
+
+    public void addCommentToTask(String taskId, String commentText, String authorUserId) {
+        Task task = tasks.get(taskId);
+        User author = users.get(authorUserId);
+        task.addComment(new Comment(commentText, author));
+    }
+
 
     public List<Task> searchTask(String keyword, TaskSortStrategy sortStrategy) {
         List<Task> result = tasks.values().stream()
