@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import com.amazon.Interface.OrderState;
-import com.amazon.Interface.OrderStatus;
+import com.amazon.Enums.OrderStatus;
 import com.amazon.Interface.Subject;
-import com.amazon.Strategy.PlacedState;
+import com.amazon.State.OrderState;
+import com.amazon.State.PlacedState;
 
 public class Order extends Subject {
     private final String id;

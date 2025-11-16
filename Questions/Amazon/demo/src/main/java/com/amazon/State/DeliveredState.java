@@ -1,6 +1,5 @@
-package com.amazon.Strategy;
+package com.amazon.State;
 
-import com.amazon.Interface.OrderState;
 import com.amazon.Models.Order;
 
 public class DeliveredState implements OrderState {

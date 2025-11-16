@@ -1,7 +1,6 @@
-package com.amazon.Strategy;
+package com.amazon.State;
 
-import com.amazon.Interface.OrderState;
-import com.amazon.Interface.OrderStatus;
+import com.amazon.Enums.OrderStatus;
 import com.amazon.Models.Order;
 
 public class PlacedState implements OrderState {

@@ -1,7 +1,5 @@
 package com.amazon.Strategy;
 
-import com.amazon.Interface.PaymentStrategy;
-
 public class CreditCardPaymentStrategy implements PaymentStrategy {
     private final String cardNumber;
 

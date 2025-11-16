@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.amazon.Interface.PaymentStrategy;
 import com.amazon.Models.Address;
 import com.amazon.Models.Customer;
 import com.amazon.Models.Order;
@@ -14,6 +13,7 @@ import com.amazon.Services.InventoryService;
 import com.amazon.Services.OrderService;
 import com.amazon.Services.PaymentService;
 import com.amazon.Services.SearchService;
+import com.amazon.Strategy.PaymentStrategy;
 
 public class OnlineShoppingSystem {
     private static volatile OnlineShoppingSystem instance;
@@ -81,7 +81,7 @@ public class OnlineShoppingSystem {
             System.out.println("Cannot place an order with an empty cart.");
             return null;
         }
-
+        
         // 1. Process payment
         boolean paymentSuccess = paymentService.processPayment(paymentStrategy, cart.calculateTotal());
         if (!paymentSuccess) {

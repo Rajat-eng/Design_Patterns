@@ -1,4 +1,4 @@
-package com.amazon.Interface;
+package com.amazon.Enums;
 
 public enum OrderStatus {   
     PENDING_PAYMENT,

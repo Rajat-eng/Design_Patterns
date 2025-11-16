@@ -1,4 +1,4 @@
-package com.amazon.Interface;
+package com.amazon.Strategy;
 
 public interface PaymentStrategy {
     boolean pay(double amount);

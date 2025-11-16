@@ -1,5 +1,6 @@
 package com.amazon;
 
+import com.amazon.Decorator.GiftWrapDecorator;
 import com.amazon.Models.Address;
 import com.amazon.Models.Customer;
 import com.amazon.Models.Order;
@@ -7,7 +8,6 @@ import com.amazon.Models.Product;
 import com.amazon.Models.ProductCategory;
 import com.amazon.Models.ShoppingCart;
 import com.amazon.Strategy.CreditCardPaymentStrategy;
-import com.amazon.Strategy.GiftWrapDecorator;
 import com.amazon.Strategy.UPIPaymentStrategy;
 
 public class Main {

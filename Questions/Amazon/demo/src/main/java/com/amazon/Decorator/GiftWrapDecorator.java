@@ -1,4 +1,4 @@
-package com.amazon.Strategy;
+package com.amazon.Decorator;
 
 import com.amazon.Models.Product;
 
