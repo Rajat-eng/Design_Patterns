@@ -3,7 +3,7 @@ package com.oyo.Decorator;
 import com.oyo.Models.Room;
 
 public class RoomBooking implements Bookable{
-private final Room room;
+    private final Room room;
 
     public RoomBooking(Room room) {
         this.room = room;

@@ -7,10 +7,15 @@ import com.zomato.Models.Order;
 public class ReadyForPickupState extends OrderState {
     @Override
     public void processOrder(Order order) {
+       System.out.println("Order ready for pickup . No more process");
+    }
+
+    @Override 
+    public void pickupOrder(Order order){
         DeliveryAgent agent = deliveryPartnerService.findBestAgent(order.getRestaurant());
         order.setDeliveryAgent(agent);
         System.out.println("Order is ready for pickup.");
-        order.setState(new OutForDeliveryState());
+        order.setState(new DeliveredState());
     }
 
     @Override

@@ -59,7 +59,7 @@ public class ZomatoService {
         Order order = new Order(customer, restaurant, items, PaymentType.ONLINE);
         orders.put(order.getId(), order);
         customer.addOrderToHistory(order);
-        order.getState().processOrder(order);
+        order.processOrder();
         System.out.printf("Order %s placed by %s at %s.\n", order.getId(), customer.getName(), restaurant.getName());
         return order;
     }
@@ -70,7 +70,7 @@ public class ZomatoService {
             System.out.println("Order not found.");
             return null;
         }
-        order.getState().processOrder(order);
+        order.pickUpOrder();
         return order;
     }
     
@@ -80,7 +80,7 @@ public class ZomatoService {
             System.out.println("Order not found.");
             return;
         }
-        order.getState().deliverOrder(order);
+        order.deliverOrder();
     }
 
     public void trackOrder(String orderId) {

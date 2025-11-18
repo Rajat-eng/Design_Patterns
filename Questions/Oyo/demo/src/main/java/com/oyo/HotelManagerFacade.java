@@ -25,6 +25,7 @@ public class HotelManagerFacade {
     private final RoomService roomService;
     private final BookingService bookingService;
     private final PaymentService paymentService;
+    
 
     public HotelManagerFacade(RoomService roomService, BookingService bookingService, PaymentService paymentService) {
         this.roomService = roomService;

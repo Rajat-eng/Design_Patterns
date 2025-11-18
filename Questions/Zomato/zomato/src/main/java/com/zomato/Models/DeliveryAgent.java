@@ -21,7 +21,7 @@ public class DeliveryAgent extends User{
 
     public void setCurrentLocation(Address currentLocation) { this.currentLocation = currentLocation; }
 
-    public Address getCurrentLocation() { return currentLocation; }
+    public Address getCurrentLocation() { return this.currentLocation; }
 
     @Override 
     public void onUpdate(Order order) {

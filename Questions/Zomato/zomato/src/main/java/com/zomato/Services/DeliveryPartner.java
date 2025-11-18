@@ -1,11 +1,14 @@
 package com.zomato.Services;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.zomato.Models.DeliveryAgent;
 import com.zomato.Models.Restaurant;
+import com.zomato.Strategy.matching.DriverMatchingStrategy;
+import com.zomato.Strategy.matching.NearestDriverMatchingStrategy;
 
 public class DeliveryPartner {
     private final static DeliveryPartner instance = new DeliveryPartner();
@@ -25,10 +28,8 @@ public class DeliveryPartner {
     }
 
     public DeliveryAgent findBestAgent(Restaurant restaurant) {
-        return agents.values().stream()
-            .filter(agent -> agent.isAvailable())
-            .sorted(Comparator.comparingDouble(agent -> restaurant.getAddress().distanceTo(agent.getCurrentLocation())))
-            .findFirst().orElse(null);
+        DriverMatchingStrategy  strategy = new NearestDriverMatchingStrategy();
+        return strategy.findDrivers(new ArrayList<>(agents.values()), restaurant); 
     }
 
 

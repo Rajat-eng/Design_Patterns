@@ -10,4 +10,10 @@ public class RoomFactory {
         RoomStyle roomStyle = RoomStyle.valueOf(style.toUpperCase());
         return new Room(roomNumber, roomType, roomStyle, price);
     }
+
+    public static class createRoom {
+
+        public createRoom() {
+        }
+    }
 }

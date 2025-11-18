@@ -10,6 +10,11 @@ public class CancelledState extends OrderState {
     }
 
     @Override
+    public void pickupOrder(Order order) {
+        System.out.println("Order is cancelled and cannot be processed.");
+    }
+
+    @Override
     public void deliverOrder(Order order) {
         System.out.println("Order is cancelled and cannot be delivered.");
     }

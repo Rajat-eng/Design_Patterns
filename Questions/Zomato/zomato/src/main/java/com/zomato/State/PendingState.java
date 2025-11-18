@@ -21,12 +21,18 @@ public class PendingState extends OrderState {
             order.setPaymentType(PaymentType.CASH);  
         }
         transactionService.initiatePayment(order, amount, order.getPaymentStrategy());
+        order.setState(new ReadyForPickupState());
         System.out.println("Order is now being prepared.");
     }
 
     @Override
     public void deliverOrder(Order order) {
         System.out.println("Order is still pending and cannot be delivered.");
+    }
+
+    @Override
+    public void pickupOrder(Order order) {
+        System.out.println("Order is still pending. Will be ready for pickup Soon.");
     }
 
     @Override

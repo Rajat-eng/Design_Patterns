@@ -16,7 +16,10 @@ public class Guest implements BookingObserver {
 
     @Override
     public void update(Booking booking){
-        System.out.println("Booking updated");
+        // for(NotificationStrategy strategy:strategies){
+        //     strategy.sendNotification(booking);
+        // }
+        
     }
 
     public String getId() { return id; }

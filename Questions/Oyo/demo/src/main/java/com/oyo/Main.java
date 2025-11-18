@@ -7,21 +7,16 @@ import com.oyo.Enums.RoomStyle;
 import com.oyo.Enums.RoomType;
 import com.oyo.Factory.RoomFactory;
 import com.oyo.Models.Guest;
-import com.oyo.Observer.EmailNotifier;
-import com.oyo.Observer.SmsNotifier;
 import com.oyo.Services.BookingService;
 import com.oyo.Services.PaymentService;
 import com.oyo.Services.RoomService;
 
 public class Main {
     public static void main(String[] args) {
-         RoomService roomService = new RoomService();
+        RoomService roomService = new RoomService();
         BookingService bookingService = new BookingService();
         PaymentService paymentService = new PaymentService();
-
-        // Register observers for the booking service
-        bookingService.addObserver(new EmailNotifier());
-        bookingService.addObserver(new SmsNotifier());
+       
 
         HotelManagerFacade hotelManager = new HotelManagerFacade(roomService, bookingService, paymentService);
 
@@ -33,6 +28,8 @@ public class Main {
         roomService.addRoom(RoomFactory.createRoom("301", "SUITE", "OCEAN_VIEW", 300));
 
         System.out.println("----------- SCENARIO 1: Successful Booking with Amenities -----------");
+
+         
         Guest guest1 = new Guest("G123", "John Doe", "john.doe@example.com");
         hotelManager.bookRoom(
                 guest1,

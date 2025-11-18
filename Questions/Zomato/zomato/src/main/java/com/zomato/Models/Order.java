@@ -55,6 +55,18 @@ public class Order {
         notifyObservers();
     }
 
+    public void processOrder(){
+        this.state.processOrder(this);
+    }
+
+    public void pickUpOrder(){
+        this.state.pickupOrder(this);
+    }
+    public void deliverOrder(){
+        this.state.deliverOrder(this);
+    }
+
+
     public OrderState getState() { return state; }
 
     public void setDeliveryAgent(DeliveryAgent deliveryAgent) {
