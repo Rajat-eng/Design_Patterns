@@ -78,6 +78,16 @@ public class MovieBookingService {
         return show;
     }
 
+    public void addSeatsToShow(Show show, List<Seat> seats){
+        if(!shows.containsKey(show.getId())){
+            return;
+        }
+        for(Seat seat:seats){
+            show.getScreen().addSeat(seat);
+        }
+        System.out.println("Seats added to the show!!");
+    }
+
     public User createUser(String name, String email) {
         User user = new User(name, email);
         users.put(user.getId(), user);
