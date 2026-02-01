@@ -47,7 +47,7 @@ public class ElevatorSystem {
 
     public void start() {
         for (Elevator elevator : elevators.values()) {
-            executorService.submit(elevator);
+            executorService.submit(elevator); // calls the runnable method in elevator
         }
     }
 
