@@ -11,4 +11,11 @@ public class UPIPaymentStrategy implements PaymentStrategy{
         // Simulate payment gateway logic
         return true;
     }
+
+    @Override
+    public boolean refund(double amount) {
+        System.out.printf("Processing UPI refund of $%.2f to upi id %s.%n", amount, upiId);
+        // Simulate refund gateway logic
+        return true;
+    }
 }

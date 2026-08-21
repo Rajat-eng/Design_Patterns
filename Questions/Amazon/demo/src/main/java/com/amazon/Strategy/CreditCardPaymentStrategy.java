@@ -11,4 +11,11 @@ public class CreditCardPaymentStrategy implements PaymentStrategy {
         // Simulate payment gateway logic
         return true;
     }
+
+    @Override
+    public boolean refund(double amount) {
+        System.out.printf("Processing credit card refund of $%.2f to card %s.%n", amount, cardNumber);
+        // Simulate refund gateway logic
+        return true;
+    }
 }

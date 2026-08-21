@@ -2,7 +2,10 @@ package com.amazon.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.amazon.Models.*;
+
 public class OrderService {
     private final InventoryService inventoryService;
 
@@ -11,8 +14,9 @@ public class OrderService {
     }
 
     public Order createOrder(Customer customer, ShoppingCart cart) {
+        Map<String, CartItem> cartSnapshot = cart.getItems();
         List<OrderLineItem> result = new ArrayList<>();
-        cart.getItems().values().stream()
+        cartSnapshot.values().stream()
             .map(cartItem -> new OrderLineItem(
                     cartItem.getProduct().getId(),
                     cartItem.getProduct().getName(),
@@ -20,8 +24,11 @@ public class OrderService {
                     cartItem.getProduct().getPrice()))
             .forEach(result::add); // Adding each OrderLineItem to result list
 
-        inventoryService.updateStockForOrder(result);
+        double totalAmount = cartSnapshot.values().stream().mapToDouble(CartItem::getPrice).sum();
 
-        return new Order(customer, result, customer.getShippingAddress(), cart.calculateTotal());
+        inventoryService.updateStockForOrder(result);
+        // inventory service throws an exception if stock is insufficient, so we don't need to check here 
+
+        return new Order(customer, result, customer.getShippingAddress(), totalAmount);
     }
 }

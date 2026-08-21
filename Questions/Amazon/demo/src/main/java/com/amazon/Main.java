@@ -1,5 +1,8 @@
 package com.amazon;
 
+import com.amazon.ChainOfResponsibility.DiscountHandler;
+import com.amazon.ChainOfResponsibility.PrimeMemberDiscountHandler;
+import com.amazon.ChainOfResponsibility.SeasonalOfferDiscountHandler;
 import com.amazon.Decorator.GiftWrapDecorator;
 import com.amazon.Models.Address;
 import com.amazon.Models.Customer;
@@ -9,6 +12,9 @@ import com.amazon.Models.ProductCategory;
 import com.amazon.Models.ShoppingCart;
 import com.amazon.Strategy.CreditCardPaymentStrategy;
 import com.amazon.Strategy.UPIPaymentStrategy;
+import com.amazon.Template.ExpressOrderProcessor;
+import com.amazon.Template.OrderProcessingTemplate;
+import com.amazon.Template.StandardOrderProcessor;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,6 +53,18 @@ public class Main {
         ShoppingCart aliceCart = system.getCustomerCart(alice.getId());
         System.out.printf("Alice's cart total: $%.2f%n", aliceCart.calculateTotal());
 
+        // --- Discount Chain of Responsibility Demo ---
+        System.out.println("\n--- Discount Chain Demo ---");
+        DiscountHandler primeDiscount = new PrimeMemberDiscountHandler();
+        DiscountHandler seasonalDiscount = new SeasonalOfferDiscountHandler();
+        primeDiscount.setNext(seasonalDiscount);
+
+        double cartTotal = aliceCart.calculateTotal();
+        double totalDiscount = primeDiscount.apply(cartTotal);
+        double finalPayable = cartTotal - totalDiscount;
+        System.out.printf("Original total: $%.2f, Discount: $%.2f, Final payable: $%.2f%n",
+            cartTotal, totalDiscount, finalPayable);
+
         // --- Alice Checks Out ---
         System.out.println("\n--- Alice proceeds to checkout ---");
         Order aliceOrder = system.placeOrder(alice.getId(), new CreditCardPaymentStrategy("1234-5678-9876-5432"));
@@ -57,6 +75,17 @@ public class Main {
 
         System.out.printf("Order #%s placed successfully for Alice.%n", aliceOrder.getId());
 
+        // --- Template Method Demo ---
+        System.out.println("\n--- Template Method Demo ---");
+        OrderProcessingTemplate standardProcessor = new StandardOrderProcessor();
+        OrderProcessingTemplate expressProcessor = new ExpressOrderProcessor();
+
+        System.out.println("Running standard order processing pipeline");
+        standardProcessor.processOrder(aliceOrder);
+
+        System.out.println("Running express order processing pipeline");
+        expressProcessor.processOrder(aliceOrder);
+
         // --- Order State and Notifications (State, Observer Patterns) ---
         System.out.println("\n--- Order processing starts ---");
 
@@ -65,6 +94,21 @@ public class Main {
 
         // The delivery service marks the order as delivered
         aliceOrder.deliverOrder(); // This will also trigger a notification
+
+        // --- Review and Rating Demo ---
+        System.out.println("\n--- Review and Rating Demo ---");
+        boolean reviewSubmitted = system.submitOrderReview(
+                alice.getId(),
+                aliceOrder.getId(),
+                laptop.getId(),
+                5,
+                "Great packaging and fast delivery!"
+        );
+        if (reviewSubmitted) {
+            system.getOrderReview(aliceOrder.getId(), laptop.getId()).ifPresent(review ->
+                    System.out.printf("Review saved for product %s. Rating: %d/5, Comment: %s%n",
+                            review.getProductId(), review.getRating(), review.getComment()));
+        }
 
         // Try to cancel a delivered order (State pattern prevents this)
         aliceOrder.cancelOrder();

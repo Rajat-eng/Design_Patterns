@@ -38,7 +38,11 @@ public class Order extends Subject {
 
     // Getters and Setters
     public String getId() { return id; }
+    public String getCustomerId() { return customer.getId(); }
     public OrderStatus getStatus() { return status; }
+    public Address getShippingAddress() { return shippingAddress; }
+    public double getTotalAmount() { return totalAmount; }
+    public LocalDateTime getOrderDate() { return orderDate; }
     public void setState(OrderState state) { this.currentState = state; }
     public void setStatus(OrderStatus status) {
         this.status = status;

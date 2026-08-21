@@ -1,5 +1,6 @@
 package com.amazon.Facade;
 
+import com.amazon.Exceptions.OutOfStockException;
 import com.amazon.Models.Customer;
 import com.amazon.Models.Order;
 import com.amazon.Models.ShoppingCart;
@@ -24,8 +25,24 @@ public class CheckoutFacade {
             return null;
         }
 
-        Order order = orderService.createOrder(customer, cart);
-        cart.clearCart();
-        return order;
+        try {
+            Order order = orderService.createOrder(customer, cart);
+            cart.clearCart();
+            return order;
+        } catch (OutOfStockException e) {
+            System.out.println("Checkout failed: " + e.getMessage());
+            boolean refundDone = paymentService.processRefund(strategy, total);
+            if (!refundDone) {
+                System.out.println("Refund failed. Please contact support.");
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println("Checkout failed: " + e.getMessage());
+            boolean refundDone = paymentService.processRefund(strategy, total);
+            if (!refundDone) {
+                System.out.println("Refund failed. Please contact support.");
+            }
+            return null;
+        }
     }
 }
