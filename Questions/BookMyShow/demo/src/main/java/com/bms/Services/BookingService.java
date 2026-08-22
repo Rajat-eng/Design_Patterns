@@ -23,9 +23,9 @@ public class BookingService {
 
     public Optional<Booking> createBooking(User user, Show show, List<Seat> seats , PaymentStrategy paymentStrategy){
 
-        boolean locked = seatLockService.lockSeats(show, seats, user.getId());
+        boolean locked = seatLockService.lockSeats(show, seats, user.getId(), 2, java.util.concurrent.TimeUnit.SECONDS);
         if (!locked) {
-            System.out.println("Seats cannot be locked. Booking cancelled.");
+            System.out.println("Seats cannot be locked in time. Booking cancelled.");
             return Optional.empty();
         }
 
@@ -50,14 +50,11 @@ public class BookingService {
                     .build();
 
             booking.confirmBooking();
-
-            seatLockService.unlockSeats(show, seats, user.getId());
-
+            seatLockService.releaseSeats(show, seats, user.getId());
             return Optional.of(booking);
         }
 
-        // If payment fails, release lock
-        seatLockService.unlockSeats(show, seats, user.getId());
+        seatLockService.releaseSeats(show, seats, user.getId());
         return Optional.empty();
     }
 

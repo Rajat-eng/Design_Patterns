@@ -18,4 +18,6 @@ public class Payment{
     }
 
     public PaymentStatus getStatus() { return status; }
+    public double getAmount() { return amount; }
+    public String getTransactionId() { return transactionId; }
 }

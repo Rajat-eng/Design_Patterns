@@ -21,13 +21,14 @@ public abstract class Seat {
         this.status = SeatStatus.AVAILABLE;
     }
 
+    public synchronized SeatStatus getStatus() { return status; }
+    public synchronized void setStatus(SeatStatus status) { this.status = status; }
+
     // Getters and a setter for status
     public String getId() { return id; }
     public int getRow() { return row; }
     public int getCol() { return col; }
     public SeatType getType() { return type; }
-    public SeatStatus getStatus() { return status; }
-    public void setStatus(SeatStatus status) { this.status = status; }
     public int getPrice(){
         return this.price;
     }

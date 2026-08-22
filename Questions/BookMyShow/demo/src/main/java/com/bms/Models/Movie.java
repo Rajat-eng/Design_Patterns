@@ -8,6 +8,10 @@ public class Movie extends MovieSubject{
     private final String title;
     private final int durationInMinutes;
 
+    public Movie(String id, String title) {
+        this(id, title, 120);
+    }
+
     public Movie(String id, String title, int durationInMinutes) {
         this.id = id;
         this.title = title;

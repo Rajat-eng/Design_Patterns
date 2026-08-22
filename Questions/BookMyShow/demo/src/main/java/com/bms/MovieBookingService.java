@@ -15,6 +15,7 @@ import com.bms.Models.Seat.Seat;
 import com.bms.Models.Show;
 import com.bms.Models.Theater;
 import com.bms.Models.User;
+import com.bms.Services.BookingCoordinatorService;
 import com.bms.Services.BookingService;
 import com.bms.Services.SeatLockingService;
 import com.bms.Strategy.payment.PaymentStrategy;
@@ -32,6 +33,7 @@ public class MovieBookingService {
     // Core services - managed by the system
     private final SeatLockingService seatLockManager;
     private final BookingService bookingManager;
+    private final BookingCoordinatorService bookingCoordinator;
 
      private MovieBookingService() {
         this.cities = new ConcurrentHashMap<>();
@@ -42,6 +44,7 @@ public class MovieBookingService {
 
         this.seatLockManager = new SeatLockingService();
         this.bookingManager = new BookingService(seatLockManager);
+        this.bookingCoordinator = new BookingCoordinatorService(seatLockManager);
     }
 
     public static MovieBookingService getInstance() {
@@ -95,12 +98,33 @@ public class MovieBookingService {
     }
 
     public Optional<Booking> bookTickets(String userId, String showId, List<Seat> desiredSeats, PaymentStrategy paymentStrategy) {
-        return bookingManager.createBooking(
-                users.get(userId),
-                shows.get(showId),
-                desiredSeats,
-                paymentStrategy
-        );
+        User user = users.get(userId);
+        Show show = shows.get(showId);
+
+        if (user == null || show == null) {
+            System.out.println("Invalid user or show.");
+            return Optional.empty();
+        }
+
+        return bookingCoordinator.createBooking(user, show, desiredSeats, paymentStrategy);
+    }
+
+    public Optional<Booking> cancelBooking(String userId, Booking booking) {
+        User user = users.get(userId);
+        if (user == null || booking == null) {
+            System.out.println("Invalid cancellation request.");
+            return Optional.empty();
+        }
+        return bookingCoordinator.cancelBooking(user, booking);
+    }
+
+    public Optional<Booking> refundBooking(String userId, Booking booking) {
+        User user = users.get(userId);
+        if (user == null || booking == null) {
+            System.out.println("Invalid refund request.");
+            return Optional.empty();
+        }
+        return bookingCoordinator.refundBooking(user, booking);
     }
 
     // --- Search Functionality ---

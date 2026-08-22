@@ -19,6 +19,12 @@ public class Screen {
         this.theater = theater;
     }
 
+    public Screen(String id, Theater theater, List<Seat> seats) {
+        this.id = id;
+        this.seats = new ArrayList<>(seats);
+        this.theater = theater;
+    }
+
     public void addSeat(Seat seat) {
         seats.add(seat);
     }
