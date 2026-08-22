@@ -30,10 +30,10 @@ public class Profile {
             educations.forEach(edu -> System.out.println("    - " + edu));
     }
 
-    public class Builder{
+    public static class Builder {
         private String summary;
-        private List<Experience> experience;
-        private List<Education> education;
+        private final List<Experience> experiences = new ArrayList<>();
+        private final List<Education> educations = new ArrayList<>();
 
         public Builder setSummary(String summary) {
             this.summary = summary;
@@ -41,17 +41,17 @@ public class Profile {
         }
 
         public Builder addExperience(Experience ex) {
-            this.experience.add(experience);
+            this.experiences.add(ex);
             return this;
         }
 
         public Builder addEducation(Education ed) {
-            this.education.add(education);
+            this.educations.add(ed);
             return this;
         }
 
         public Profile build() {
-            return new Profile(summary, experience, education);
+            return new Profile(summary, experiences, educations);
         }
     }
 }
