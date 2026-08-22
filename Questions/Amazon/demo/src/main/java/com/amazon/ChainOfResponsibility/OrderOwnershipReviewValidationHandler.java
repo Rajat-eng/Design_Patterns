@@ -2,10 +2,11 @@ package com.amazon.ChainOfResponsibility;
 
 public class OrderOwnershipReviewValidationHandler extends OrderReviewValidationHandler {
     @Override
-    protected ReviewValidationResult doValidate(ReviewValidationContext context) {
+    protected boolean doValidate(ReviewValidationContext context) {
         if (!context.getOrder().getCustomerId().equals(context.getCustomerId())) {
-            return ReviewValidationResult.fail("Review failed: only the order owner can review this order.");
+            System.out.println("Review failed: only the order owner can review this order.");
+            return false;
         }
-        return ReviewValidationResult.ok();
+        return true;
     }
 }

@@ -8,17 +8,17 @@ public abstract class OrderReviewValidationHandler {
         return this;
     }
 
-    public ReviewValidationResult validate(ReviewValidationContext context) {
-        ReviewValidationResult currentResult = doValidate(context);
+    public boolean validate(ReviewValidationContext context) {
+        boolean currentResult = doValidate(context);
         // context is chain of responsibility, if current result is not valid, return it, else pass to next handler
-        if (!currentResult.isValid()) {
-            return currentResult;
+        if (!currentResult) {
+            return false;
         }
         if (next == null) {
-            return ReviewValidationResult.ok();
+            return true;
         }
         return next.validate(context);  // recursively call the next handler in the chain  
     }
 
-    protected abstract ReviewValidationResult doValidate(ReviewValidationContext context);
+    protected abstract boolean doValidate(ReviewValidationContext context);
 }

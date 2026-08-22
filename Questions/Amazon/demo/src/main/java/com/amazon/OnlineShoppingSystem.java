@@ -203,9 +203,9 @@ public class OnlineShoppingSystem {
                     reviewKey
             );
             // review validation chain 
-            ReviewValidationResult validationResult = reviewValidationChain.validate(context);
-            if (!validationResult.isValid()) {
-                System.out.println(validationResult.getMessage());
+            boolean validationResult = reviewValidationChain.validate(context);
+            if (!validationResult) {
+                System.out.println("Review validation failed.");
                 return false;
             }
 

@@ -2,10 +2,11 @@ package com.amazon.ChainOfResponsibility;
 
 public class DuplicateReviewValidationHandler extends OrderReviewValidationHandler {
     @Override
-    protected ReviewValidationResult doValidate(ReviewValidationContext context) {
+    protected boolean doValidate(ReviewValidationContext context) {
         if (context.getExistingReviews().containsKey(context.getReviewKey())) {
-            return ReviewValidationResult.fail("Review failed: review already submitted for this product in this order.");
+            System.out.println("Review failed: review already submitted for this product in this order.");
+            return false;
         }
-        return ReviewValidationResult.ok();
+        return true;
     }
 }
